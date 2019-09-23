@@ -1,0 +1,26 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: nginx-ingress
+  namespace: kube-system
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: nginx-ingress
+  chart:
+    repository: http://mirror.azure.cn/kubernetes/charts
+    name: nginx-ingress
+    version: 1.20.0
+  values:
+    controller:
+      service:
+        externalTrafficPolicy: Local
+      stats:
+        enabled: true
+      metrics:
+        enabled: true
+        service:
+          annotations:
+            prometheus.io/scrape: "true"
+            prometheus.io/port: "10254"
