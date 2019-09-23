@@ -1,0 +1,27 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: kubernetes-dashboard
+  namespace: kube-system
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: kubernetes-dashboard
+  chart:
+    repository: http://mirror.azure.cn/kubernetes/charts
+    name: kubernetes-dashboard
+    version: 1.9.0
+  values:
+    enableSkipLogin: true
+    extraArgs:
+      - --heapster-host=http://heapster.kube-system
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+        nginx.ingress.kubernetes.io/rewrite-target: /$2
+      paths:
+        - /kubernetes-dashboard(/|$)(.*)
+    rbac:
+      clusterAdminRole: true
