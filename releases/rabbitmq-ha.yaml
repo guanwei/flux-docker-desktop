@@ -1,0 +1,15 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: rabbitmq-ha
+  namespace: kube-application
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: rabbitmq-ha
+  chart:
+    repository: http://mirror.azure.cn/kubernetes/charts
+    name: rabbitmq-ha
+    version: 1.32.1
+  values:
