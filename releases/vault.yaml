@@ -3,7 +3,7 @@ apiVersion: flux.weave.works/v1beta1
 kind: HelmRelease
 metadata:
   name: vault
-  namespace: kube-application
+  namespace: default
   annotations:
     flux.weave.works/automated: "true"
 spec:
