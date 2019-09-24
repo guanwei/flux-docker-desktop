@@ -12,4 +12,3 @@ spec:
     repository: http://mirror.azure.cn/kubernetes/charts
     name: rabbitmq-ha
     version: 1.32.1
-  values:
