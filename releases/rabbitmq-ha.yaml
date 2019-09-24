@@ -15,4 +15,6 @@ spec:
   values:
     ingress:
       enabled: true
-      path: /rabbitmq
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /$2
+      path: /rabbitmq(/|$)(.*)
