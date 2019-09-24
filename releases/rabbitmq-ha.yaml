@@ -13,10 +13,6 @@ spec:
     name: rabbitmq-ha
     version: 1.32.1
   values:
-    rabbitmqUsername: guest
-    rabbitmqPassword: guest
-    managementUsername: admin
-    managementPassword: admin
     ingress:
       enabled: true
       annotations:
