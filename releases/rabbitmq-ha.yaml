@@ -5,7 +5,7 @@ metadata:
   name: rabbitmq-ha
   namespace: default
   annotations:
-    flux.weave.works/automated: "true"
+    flux.weave.works/automated: "false"
 spec:
   releaseName: rabbitmq-ha
   chart:
