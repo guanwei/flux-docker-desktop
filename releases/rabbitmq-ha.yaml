@@ -13,21 +13,9 @@ spec:
     name: rabbitmq-ha
     version: 1.32.1
   values:
-    definitions:
-      users: |-
-        {
-          "name": "admin",
-          "password": "admin",
-          "tags": "administrator"
-        }
-      permissions: |-
-        {
-          "user": "admin",
-          "vhost": "/",
-          "configure": ".*",
-          "write": ".*",
-          "read": ".*"
-        }
+    env:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
     ingress:
       enabled: true
       annotations:
