@@ -13,10 +13,21 @@ spec:
     name: rabbitmq-ha
     version: 1.32.1
   values:
-    rabbitmqUsername: guest
-    rabbitmqPassword: guest
-    managementUsername: admin
-    managementPassword: admin
+    definitions:
+      users: |-
+        {
+          "name": "admin",
+          "password": "admin",
+          "tags": "administrator"
+        }
+      permissions: |-
+        {
+          "user": "admin",
+          "vhost": "/",
+          "configure": ".*",
+          "write": ".*",
+          "read": ".*"
+        }
     ingress:
       enabled: true
       annotations:
