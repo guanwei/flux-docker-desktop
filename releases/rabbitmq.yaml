@@ -1,0 +1,36 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: rabbitmq
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/delete: "true"
+spec:
+  releaseName: rabbitmq
+  chart:
+    repository: http://mirror.azure.cn/kubernetes/charts/
+    name: rabbitmq
+    version: 6.7.4
+  values:
+    rabbitmq:
+      username: admin
+      password: admin
+      extraPlugins: "rabbitmq_shovel rabbitmq_shovel_management rabbitmq_federation rabbitmq_federation_management"
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+    replicas: 1
+    metrics:
+      enabled: true
+    volumePermissions:
+      enabled: true
+    persistence:
+      enabled: true
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /$2
+      path: /rabbitmq(/|$)(.*)
