@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    flux.weave.works/automated: "true"
-    flux.weave.works/delete: "true"
-  labels:
-    name: test
-  name: test
