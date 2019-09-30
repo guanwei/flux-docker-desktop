@@ -1,0 +1,15 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: consul
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/delete: "true"
+spec:
+  releaseName: consul
+  chart:
+    repository: http://mirror.azure.cn/kubernetes/charts/
+    name: consul
+    version: 3.8.1
