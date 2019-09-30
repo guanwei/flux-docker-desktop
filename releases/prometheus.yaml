@@ -1,0 +1,82 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: prometheus
+  namespace: monitoring
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/delete: "true"
+spec:
+  releaseName: prometheus
+  chart:
+    repository: http://mirror.azure.cn/kubernetes/charts/
+    name: prometheus
+    version: 9.1.1
+  values:
+    alertmanager:
+      baseURL: /prometheus-alertmanager
+      extraArgs:
+        web.route-prefix: /
+      ingress:
+        enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/rewrite-target: /$2
+        hosts:
+          - /prometheus-alertmanager(/|$)(.*)
+      replicaCount: 1
+    server:
+      baseURL: /prometheus
+      extraArgs:
+        web.route-prefix: /
+      ingress:
+        enabled: true
+        annotations:
+          nginx.ingress.kubernetes.io/rewrite-target: /$2
+        hosts:
+          - /prometheus(/|$)(.*)
+      replicaCount: 1
+    alertmanagerFiles:
+      alertmanager.yml:
+        global: {}
+          # slack_api_url: ''
+        receivers:
+          - name: default-receiver
+            # slack_configs:
+            #  - channel: '@you'
+            #    send_resolved: true
+        route:
+          group_wait: 10s
+          group_interval: 5m
+          receiver: default-receiver
+          repeat_interval: 3h
+    serverFiles:
+      alerts: {}
+      # groups:
+      #   - name: Instances
+      #     rules:
+      #       - alert: InstanceDown
+      #         expr: up == 0
+      #         for: 5m
+      #         labels:
+      #           severity: page
+      #         annotations:
+      #           description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes.'
+      #           summary: 'Instance {{ $labels.instance }} down'
+      rules: {}
+    extraScrapeConfigs:
+      # - job_name: 'prometheus-blackbox-exporter'
+      #   metrics_path: /probe
+      #   params:
+      #     module: [http_2xx]
+      #   static_configs:
+      #     - targets:
+      #       - https://example.com
+      #   relabel_configs:
+      #     - source_labels: [__address__]
+      #       target_label: __param_target
+      #     - source_labels: [__param_target]
+      #       target_label: instance
+      #     - target_label: __address__
+      #       replacement: prometheus-blackbox-exporter:9115
+
