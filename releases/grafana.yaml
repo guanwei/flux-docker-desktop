@@ -1,0 +1,41 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: grafana
+  namespace: monitoring
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/delete: "true"
+spec:
+  releaseName: grafana
+  chart:
+    repository: http://mirror.azure.cn/kubernetes/charts/
+    name: grafana
+    version: 3.8.15
+  values:
+    adminPassword: admin
+    env:
+      GF_SERVER_ROOT_URL: "%(protocol)s://%(domain)s/grafana"
+    ingress:
+      enabled: true
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /$2
+      hosts: 
+        - ""
+      path: /grafana(/|$)(.*)
+    persistence:
+      enabled: true
+    plugins:
+      - grafana-kubernetes-app
+      - percona-percona-app
+      - grafana-piechart-panel
+    datasources:
+      datasources.yaml:
+        apiVersion: 1
+        datasources:
+          - name: Prometheus
+            type: prometheus
+            url: http://prometheus-server
+            access: proxy
+            isDefault: true
