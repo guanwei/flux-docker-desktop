@@ -25,3 +25,5 @@ spec:
           annotations:
             prometheus.io/scrape: "true"
             prometheus.io/port: "10254"
+    tcp:
+      5672: "default/rabbitmq:5672"
