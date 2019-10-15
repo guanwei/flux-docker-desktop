@@ -1,0 +1,25 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: mongodb
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: mongodb
+  chart:
+    repository: http://mirror.azure.cn/kubernetes/charts/
+    name: mongodb
+    version: 7.2.9
+  values:
+    mongodbRootPassword: admin
+    mongodbUsername: co
+    mongodbPassword: co
+    mongodbDatabase: co
+    metrics:
+      enabled: true
+      livenessProbe:
+        enabled: true
+      readinessProbe:
+        enabled: true
