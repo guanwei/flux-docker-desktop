@@ -6,7 +6,6 @@ metadata:
   namespace: kube-system
   annotations:
     flux.weave.works/automated: "true"
-    flux.weave.works/delete: "true"
 spec:
   releaseName: nginx-ingress
   chart:

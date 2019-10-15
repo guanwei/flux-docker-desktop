@@ -2,13 +2,17 @@
 apiVersion: flux.weave.works/v1beta1
 kind: HelmRelease
 metadata:
-  name: consul
+  name: redis
   namespace: default
   annotations:
     flux.weave.works/automated: "true"
 spec:
-  releaseName: consul
+  releaseName: redis
   chart:
     repository: http://mirror.azure.cn/kubernetes/charts/
-    name: consul
-    version: 3.8.1
+    name: redis
+    version: 9.2.0
+  values:
+    password: admin
+    metrics:
+      enabled: true
