@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flux-ssh-config
+  namespace: flux
+data:
+  config: |
+    Host github.com
+      Hostname ssh.github.com
+      Port 443
+      StrictHostKeyChecking no
