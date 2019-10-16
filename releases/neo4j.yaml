@@ -15,5 +15,3 @@ spec:
   values:
     acceptLicenseAgreement: "yes"
     neo4jPassword: admin
-    core:
-      numberOfServers: 1
