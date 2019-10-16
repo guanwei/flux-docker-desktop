@@ -1,0 +1,17 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: neo4j
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: neo4j
+  chart:
+    repository: http://mirror.azure.cn/kubernetes/charts/
+    name: neo4j
+    version: 1.2.0
+  values:
+    acceptLicenseAgreement: yes
+    neo4jPassword: admin
