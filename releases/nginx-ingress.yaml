@@ -26,3 +26,4 @@ spec:
             prometheus.io/port: "10254"
     tcp:
       5672: "default/rabbitmq:5672"
+      7687: "default/neo4j-neo4j:7687"
