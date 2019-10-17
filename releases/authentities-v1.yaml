@@ -29,6 +29,12 @@ spec:
       - name: COM_PHILIPS_SAPPHIRE_INFRASTRUCTURE_LOGGING_RABBIT_URI
         value: amqp://admin:admin@rabbitmq.default:5672
       # Redis configuration
+      - name: REDIS_AUTH_HOST
+        value: redis-master.default
+      - name: REDIS_AUTH_PORT
+        value: "6379"
+      - name: REDIS_AUTH_PASSWORD
+        value: admin
       - name: REDIS_HOST
         value: redis-master.default
       - name: REDIS_PORT
