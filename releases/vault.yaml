@@ -10,4 +10,5 @@ spec:
   releaseName: vault
   chart:
     git: https://github.com/hashicorp/vault-helm
+    path: /
     ref: master
