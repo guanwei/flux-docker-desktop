@@ -1,0 +1,23 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: authentities-v1
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: authentities-v1
+  chart:
+    git: https://github.com/guanwei/flux-docker-desktop
+    path: charts/micro-service
+    ref: master
+  values:
+    image:
+      repository: registry.cn-shanghai.aliyuncs.com/src-co/authentities-v1
+      tag: 1.21.19283.143806
+    imagePullSecrets:
+      - name: hsc-regsecret
+    env:
+      - name: COM_PHILIPS_SAPPHIRE_INFRASTRUCTURE_LOGGING_RABBIT_URI
+        value: amqp://admin:admin@rabbitmq.default:5672
