@@ -19,6 +19,19 @@ spec:
       tag: 1.21.19283.143806
     imagePullSecrets:
       - name: hsc-regsecret
+    containerPort: 8196
     env:
+      # RabbitMQ Configuration
+      - name: COM_PHILIPS_SAPPHIRE_INFRASTRUCTURE_MESSAGING_CONNECTION_HOST
+        value: amqp://admin:admin@rabbitmq.default:5672
+      - name: COM_PHILIPS_SAPPHIRE_INFRASTRUCTURE_MESSAGING_RABBIT_URI
+        value: amqp://admin:admin@rabbitmq.default:5672
       - name: COM_PHILIPS_SAPPHIRE_INFRASTRUCTURE_LOGGING_RABBIT_URI
         value: amqp://admin:admin@rabbitmq.default:5672
+      # Redis configuration
+      - name: REDIS_HOST
+        value: redis-master.default
+      - name: REDIS_PORT
+        value: 6379
+      - name: REDIS_PASSWORD
+        value: admin
