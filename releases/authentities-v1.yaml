@@ -13,6 +13,7 @@ spec:
     path: charts/micro-service
     ref: master
   values:
+    fullnameOverride: authentities-v1
     image:
       repository: registry.cn-shanghai.aliyuncs.com/src-co/authentities-v1
       tag: 1.21.19283.143806
