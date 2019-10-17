@@ -1,0 +1,19 @@
+image:
+  repository: registry.cn-shanghai.aliyuncs.com/src-co-dev/micro-service
+  tag: 0.0.1
+
+imagePullSecrets:
+  - name: regsecret
+
+env:
+  - name: COM_PHILIPS_SAPPHIRE_INFRASTRUCTURE_LOGGING_RABBIT_URI
+    value: amqp://admin:admin@rabbitmq.default:5672/
+
+ingress:
+  enabled: true
+  hosts:
+    - host:
+      paths:
+        - /micro-service
+
+
