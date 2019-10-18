@@ -21,6 +21,12 @@ spec:
       - name: hsc-regsecret
     containerPort: 8196
     env:
+      - name: JAVA_OPTS
+        value: "-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector -DAsyncLogger.RingBufferSize=117965"
+      - name: JBP_CONFIG_OPEN_JDK_JRE
+        value: "[memory_calculator: {memory_sizes: {metaspace: 96m..256m}}]"
+      - name: SPRING_PROFILES_ACTIVE
+        value: local
       # RabbitMQ Configuration
       - name: COM_PHILIPS_SAPPHIRE_INFRASTRUCTURE_MESSAGING_CONNECTION_HOST
         value: amqp://admin:admin@rabbitmq.default:5672
