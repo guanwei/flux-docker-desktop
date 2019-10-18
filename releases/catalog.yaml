@@ -1,0 +1,14 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: catalog
+  namespace: catalog
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: catalog
+  chart:
+    repository: https://svc-catalog-charts.storage.googleapis.com
+    name: catalog
+    version: 0.3.0-beta.1
