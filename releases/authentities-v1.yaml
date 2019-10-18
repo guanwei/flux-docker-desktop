@@ -47,3 +47,12 @@ spec:
         value: "6379"
       - name: REDIS_PASSWORD
         value: admin
+      # Neo4j configuration
+      - name: NEO4J_SERVER_READ_URI
+        value: bolt://neo4j-neo4j-core-0.neo4j-neo4j.default:7687
+      - name: NEO4J_SERVER_WRITE_URI
+        value: bolt://neo4j-neo4j-core-0.neo4j-neo4j.default:7687
+      - name: NEO4J_SERVER_USERNAME
+        value: neo4j
+      - name: NEO4J_SERVER_PASSWORD
+        value: admin
