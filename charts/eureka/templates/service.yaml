@@ -9,6 +9,7 @@ spec:
   ports:
   - name: http
     port: {{ .Values.service.port }}
+    targetPort: http
   selector:
     app.kubernetes.io/name: {{ include "eureka.name" . }}
     app.kubernetes.io/instance: {{ .Release.Name }}

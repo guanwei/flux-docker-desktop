@@ -21,10 +21,13 @@ spec:
       - name: eureka-server
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.service.internalPort }}
         readinessProbe:
           httpGet:
             path: /health
-            port: {{ .Values.service.internalPort }}
+            port: http
           initialDelaySeconds: 20
         volumeMounts:
         - mountPath: /config
@@ -37,3 +40,7 @@ spec:
         {{- else }}
           name: {{ include "eureka.fullname" . }}
         {{- end }}
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
