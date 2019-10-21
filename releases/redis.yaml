@@ -15,7 +15,6 @@ spec:
   values:
     cluster:
       enabled: false
-      slaveCount: 0
     password: admin
     metrics:
       enabled: true
