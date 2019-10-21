@@ -6,7 +6,7 @@ metadata:
   labels:
 {{ include "eureka.labels" . | indent 4 }}
 data:
-  bootstrap.yaml: |+
+  bootstrap.yaml: |
     server:
       port: {{ .Values.service.internalPort }}
     spring:
@@ -21,7 +21,7 @@ data:
           enabled: false
         {{- end }}
 
-  application.yaml: |+
+  application.yaml: |
     eureka:
       instance:
         hostname: localhost

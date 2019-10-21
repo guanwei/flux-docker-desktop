@@ -12,10 +12,3 @@ spec:
     git: ssh://git@github.com/guanwei/flux-docker-desktop
     path: charts/eureka
     ref: master
-  values:
-    ingress:
-      enabled: true
-      hosts:
-        - host:
-          paths:
-            - /eureka
