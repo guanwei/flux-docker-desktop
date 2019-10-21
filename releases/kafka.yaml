@@ -1,0 +1,14 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: kafka
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: kafka
+  chart:
+    repository: https://charts.bitnami.com/bitnami
+    name: kafka
+    version: 6.1.0
