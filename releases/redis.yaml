@@ -13,8 +13,8 @@ spec:
     name: redis
     version: 9.2.0
   values:
-    cluster:
-      enabled: false
+    # cluster:
+    #   enabled: false
     password: admin
     metrics:
       enabled: true
