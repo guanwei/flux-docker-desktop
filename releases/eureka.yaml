@@ -9,6 +9,6 @@ metadata:
 spec:
   releaseName: eureka
   chart:
-    git: git@github.com:guanwei/flux-docker-desktop
+    git: ssh://git@github.com/guanwei/flux-docker-desktop
     path: charts/spring-eureka-server
     ref: master
