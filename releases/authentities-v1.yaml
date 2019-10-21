@@ -65,3 +65,8 @@ spec:
         value: 'true'
       - name: EUREKA_INSTANCE_PREFER_IP_ADDRESS
         value: 'true'
+      # MongoDB Configuration
+      - name: SPRING_DATA_MONGODB_URI
+        value: mongodb://mongodb.default:27017/co?ssl=false
+      - name: MONGO_ORGDB_URI
+        value: mongodb://mongodb.default:27017/co?ssl=false
