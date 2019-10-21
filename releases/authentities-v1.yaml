@@ -56,3 +56,12 @@ spec:
         value: neo4j
       - name: NEO4J_SERVER_PASSWORD
         value: admin
+      # Eureka configuration
+      - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+        value: http://eureka.default:8761/eureka
+      - name: EUREKA_CLIENT_REGISTER_WITH_EUREKA
+        value: 'true'
+      - name: EUREKA_CLIENT_ENABLED
+        value: 'true'
+      - name: EUREKA_INSTANCE_PREFER_IP_ADDRESS
+        value: 'true'
