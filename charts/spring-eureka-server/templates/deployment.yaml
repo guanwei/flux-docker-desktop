@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-{{  .Chart.Name }}
+  labels:
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+    component: eureka-server
+spec:
+  replicas:  {{ .Values.replicaCount }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  template:
+    metadata:
+      labels:
+        component: eureka-server
+    spec:
+      containers:
+      - name: eureka-server
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: {{ .Values.service.internalPort }}
+          initialDelaySeconds: 20
+        volumeMounts:
+        - mountPath: /config
+          name: eureka-server-config
+      volumes:
+      - name: eureka-server-config
+{{ include "configServerBootstrap" . }}
