@@ -1,0 +1,14 @@
+---
+apiVersion: flux.weave.works/v1beta1
+kind: HelmRelease
+metadata:
+  name: eureka
+  namespace: default
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  releaseName: eureka
+  chart:
+    git: git@github.com:guanwei/flux-docker-desktop
+    path: charts/spring-eureka-server
+    ref: master
