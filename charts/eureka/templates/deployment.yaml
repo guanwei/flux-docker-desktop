@@ -1,19 +1,21 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-{{  .Chart.Name }}
+  name: {{ include "eureka.fullname" . }}
   labels:
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
-    component: eureka-server
+{{ include "eureka.labels" . | indent 4 }}
 spec:
   replicas:  {{ .Values.replicaCount }}
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "eureka.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        component: eureka-server
+        app.kubernetes.io/name: {{ include "eureka.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       containers:
       - name: eureka-server
@@ -29,4 +31,9 @@ spec:
           name: eureka-server-config
       volumes:
       - name: eureka-server-config
-{{ include "configServerBootstrap" . }}
+        configMap:
+        {{- if .Values.config.existingConfigMapName }}
+          name: {{ .Values.config.existingConfigMapName }}
+        {{- else }}
+          name: {{ include "eureka.fullname" . }}
+        {{- end }}

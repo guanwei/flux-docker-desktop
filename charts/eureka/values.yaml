@@ -9,7 +9,6 @@ image:
   pullPolicy: Always
 
 service:
-  name:
   type: ClusterIP
   port: 8761
   internalPort: 8761
@@ -22,6 +21,3 @@ spring:
     config:
       enabled: false
       uri:
-
-global:
-  useConfigServerBootstrap: false

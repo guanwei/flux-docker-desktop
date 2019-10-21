@@ -1,15 +1,10 @@
-{{ if .Values.global.useConfigServerBootstrap }}
-{{ else if .Values.config.existingConfigMapName }}
-{{ else }}
+{{ if not .Values.config.existingConfigMapName }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Release.Name }}-{{ .Chart.Name }}
+  name: {{ include "eureka.fullname" . }}
   labels:
-    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
-    component: eureka-server
+{{ include "eureka.labels" . | indent 4 }}
 data:
   bootstrap.yaml: |+
     server:
@@ -19,12 +14,12 @@ data:
         name: eureka-server
       cloud:
         config:
-{{ if .Values.spring.cloud.config.enabled }}
+        {{- if .Values.spring.cloud.config.enabled }}
           enabled: {{ .Values.spring.cloud.config.enabled }}
           uri: {{ required "A valid value of spring.cloud.config.uri is required!" .Values.spring.cloud.config.uri }}
-{{ else }}
+        {{- else }}
           enabled: false
-{{ end }}
+        {{- end }}
 
   application.yaml: |+
     eureka:
