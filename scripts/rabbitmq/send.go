@@ -20,13 +20,13 @@ func main() {
 	cfg := new(tls.Config)
 	cfg.RootCAs = x509.NewCertPool()
 
-	if ca, err := ioutil.ReadFile("ssl/cacert.pem"); err == nil {
+	if ca, err := ioutil.ReadFile("ssl/ca_certificate.pem"); err == nil {
 		cfg.RootCAs.AppendCertsFromPEM(ca)
 	} else {
 		failOnError(err, "Failed to append ca")
 	}
 
-	if cert, err := tls.LoadX509KeyPair("ssl/client_cert.pem", "ssl/client_key.pem"); err == nil {
+	if cert, err := tls.LoadX509KeyPair("ssl/client_certificate.pem", "ssl/client_key.pem"); err == nil {
 		cfg.Certificates = append(cfg.Certificates, cert)
 	} else {
 		failOnError(err, "Failed to append client cert")

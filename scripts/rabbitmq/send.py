@@ -2,16 +2,24 @@ import logging
 import pika
 import ssl
 
-logging.basicConfig(level=logging.INFO)
-context = ssl.create_default_context(
-    cafile="ssl/cacert.pem")
-context.load_cert_chain("ssl/client.cert.pem",
-                        "ssl/client.key.pem")
-ssl_options = pika.SSLOptions(context, "localhost")
-conn_params = pika.ConnectionParameters(port=5671,
-                                        ssl_options=ssl_options)
+#logging.basicConfig(level=logging.INFO)
 
-with pika.BlockingConnection(conn_params) as conn:
+context = ssl.create_default_context(
+    cafile="ssl/ca_certificate.pem")
+context.load_cert_chain("ssl/client_certificate.pem",
+                        "ssl/client_key.pem")
+ssl_options = pika.SSLOptions(context, "localhost")
+credentials = pika.PlainCredentials("admin", "admin")
+parameters = pika.ConnectionParameters(host="localhost",
+                                       port=5671,
+                                       virtual_host="/",
+                                       ssl_options=ssl_options,
+                                       credentials=credentials)
+
+body = "Hello World!"
+
+with pika.BlockingConnection(parameters) as conn:
     ch = conn.channel()
-    ch.queue_declare("foobar")
-    ch.basic_publish("", "foobar", "Hello, world!")
+    ch.queue_declare("hello")
+    ch.basic_publish("", "hello", body)
+    print(" [x] Sent {}".format(body))
