@@ -17,6 +17,9 @@ spec:
       username: admin
       password: admin
       extraPlugins: "rabbitmq_shovel rabbitmq_shovel_management rabbitmq_federation rabbitmq_federation_management"
+      extraConfiguration: |-
+        ssl_options.versions.1 = tlsv1.2
+        ssl_options.versions.2 = tlsv1.1
       tls:
         enabled: true
         caCertificate: |-
